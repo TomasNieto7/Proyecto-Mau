@@ -29,7 +29,7 @@ notes.post('/', async (req, res, next) => {
     })
 })
 
-notes.get('/getNote', async (req, res, next) => {
+notes.post('/getNote', async (req, res, next) => {
     const {
         id
     } = req.body

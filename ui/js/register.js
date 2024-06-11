@@ -16,7 +16,6 @@ const register = () => {
     const phone_number = document.getElementById('input-phone_number').value
     const password = document.getElementById('input-password').value
 
-    console.log(2);
     axios({
         method: 'post',
         url: 'http://localhost:3000/user/register',

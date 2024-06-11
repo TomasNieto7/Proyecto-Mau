@@ -55,9 +55,12 @@ function logout() {
     window.location.href = 'login.html'
 }
 
-function deleteNote(button) {
+async function deleteNote(button) {
     const nota = button.closest('.nota');
     const notaId = nota.id;
+    await getNote(notaId)
+    /*
+    
     axios({
         method: 'delete',
         url: 'http://localhost:3000/notes/delete',
@@ -71,8 +74,46 @@ function deleteNote(button) {
             alert("Error al eliminar la nota");
         }
     }).catch(error => console.log(error));
+    
+    */
 }
 
+function getNote(id) {
+    axios({
+        method: 'post',
+        url: 'http://localhost:3000/notes/getNote',
+        data: {
+            id: id
+        }
+    }).then((res => {
+        if (res.data.code === 200) {
+            newNotePapeleta(res.data.message)
+        } else {
+            alert("error")
+        }
+    })).catch(error => console.log(error))
+}
+
+function newNotePapeleta(note) {
+    axios({
+        method: 'post',
+        url: 'http://localhost:3000/papelera/newNote',
+        data: {
+            owner: note.owner,
+            title: note.title,
+            description: note.description,
+            type: note.type
+        }
+    }).then((res) => {
+        if (res.data.code === 201) {
+            console.log(res.data.message);
+            closeModal();
+            window.location.href = 'notes.html'
+        } else {
+            alert("Error al eliminar la nota");
+        }
+    }).catch(error => console.log(error));
+}
 
 function editNote() {
     const nota = button.closest('.nota');
@@ -103,7 +144,6 @@ function newNote() {
     const title = document.querySelector('#noteTitle').value
     const description = document.querySelector('#noteDescription').value
     const type = document.querySelector('#noteCategory').value
-    console.log(user, title, description, type);
     axios({
         method: 'post',
         url: 'http://localhost:3000/notes/newNote',
@@ -116,6 +156,8 @@ function newNote() {
     }).then((res) => {
         if (res.data.code === 201) {
             console.log(res.data.message);
+            closeModal();
+            window.location.href = 'notes.html'
         } else {
             alert("Error al eliminar la nota");
         }
