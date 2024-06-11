@@ -1,15 +1,18 @@
-const jwt = require('jsonwebtoken')
-
-window.onload = init
+window.onload = init;
 
 function init() {
     if (localStorage.getItem('token')) {
-        const token = localStorage.getItem('token')
-        const decoded = jwt.verify(token, "debugKey")
-        console.log(decoded);
-        loadPokemon()
+        const token = localStorage.getItem('token');
+        try {
+            const decoded = jwt_decode(token); // Utiliza jwt_decode en lugar de jwt.verify
+            console.log(decoded);
+            loadPokemon();
+        } catch (error) {
+            console.error("Token inválido:", error);
+            window.location.href = 'login.html';
+        }
     } else {
-        window.location.href = 'login.html'
+        window.location.href = 'login.html';
     }
 }
 
@@ -20,13 +23,15 @@ function loadPokemon() {
         }
     })
     .then(function(res) {
-        console.log(res);
+        return res.json(); // Asegúrate de procesar la respuesta como JSON
+    })
+    .then(function(data) {
+        console.log(data);
     })
     .catch(function(err) {
         console.log(err);
-    })
+    });
 }
-
 
 // Open the modal
 function openModal() {
@@ -63,3 +68,4 @@ document.getElementById('noteDescription').addEventListener('blur', function() {
         this.placeholder = 'Escribe algo...';
     }
 });
+s
