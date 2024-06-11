@@ -1,13 +1,3 @@
-/*
- name,
-        last_name,
-        mail,
-        phone_number,
-        password
-
- */
-
-
 
 window.onload = init
 
@@ -37,5 +27,8 @@ const register = () => {
             phone_number: phone_number,
             password: password
         }
-    }).then((res => console.log(res))).catch(error => console.log(error))
+    }).then((res => {
+        console.log(res);
+        window.location.href = "login.html"
+    })).catch(error => console.log(error))
 }
