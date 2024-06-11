@@ -14,24 +14,25 @@ user.post('/register', async (req, res, next) => {
     const {
         name,
         last_name,
-        mail,
+        email,
         phone_number,
         password
     } = req.body
-    const query = `INSERT INTO USERS(name, last_name, mail, phone_number, password) VALUES('${name}', '${last_name}', '${mail}', '${phone_number}', '${password}')`
+    console.log(name, last_name, email, phone_number, password);
+    const query = `INSERT INTO USERS(name, last_name, mail, phone_number, password) VALUES('${name}', '${last_name}', '${email}', '${phone_number}', '${password}')`
     try {
-        if (name && last_name && mail && phone_number && password) {
+        if (name && last_name && email && phone_number && password) {
             const user = await db.query(query)
             console.log(user);
             user ? res.status(201).json({
                 code: 201,
                 message: "User registered!!"
-            }) : res.status(404).json({
-                code: 404,
+            }) : res.status(200).json({
+                code: 200,
                 message: "Something went wrong"
             })
-        } else res.status(404).json({
-            code: 404,
+        } else res.status(200).json({
+            code: 200,
             message: "data missing"
         })
 

@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 //Routers
 const user = require("./routes/users.js")
+const notes = require("./routes/notes.js")
 //Middleware
 const auth = require('./middleware/auth.js')
 const index = require('./middleware/index.js')
@@ -19,6 +20,8 @@ app.get("/", index)
 
 app.use("/user", user)
 app.use(auth)
+app.use("/notes", user)
+
 
 app.use(notFound)
 
