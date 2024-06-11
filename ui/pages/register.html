@@ -6,19 +6,30 @@
     <title>Login</title>
     <script defer src="../js/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
     <main>
         <section>
             <div class="register">
+                
+                <h1 id="NoteTitle"> Note it</h1>
+                <p>Tu mundo, tus notas, tu web.</p>
+
+                <div class="camposregistro">
+                <p id="avisoDatos">Ingresa tus datos:</p>
                 <input type="text" id="input-name" placeholder="name">
                 <input type="text" id="input-last_name" placeholder="last name">
                 <input type="text" id="input-email" placeholder="email">
                 <input type="text" id="input-phone_number" placeholder="phone number">
                 <input type="password" id="input-password" placeholder="password">
-                <div>
-                    <button class="btn-register">Register</button>
-                    <button class="btn-login">Login</button>
+
+                </div>
+                
+                <div class="botonesregistro">
+                    <button class="btn-register">Completar registro</button>
+                    <p class="cuenta-texto">¿Ya tienes una cuenta?</p>
+                <a href="login.html">    <button class="btn-login">Login</button> </a>
                 </div>
             </div>
         </section>

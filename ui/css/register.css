@@ -7,8 +7,9 @@ body{
     background-image: url('../img/loginbg2.jpg');
     background-size: auto; 
     background-repeat: no-repeat; 
-    background-position: 50% 30%;
+    background-position: 50% 10%;
 }
+
 
 p{
     font-family: "Lato", sans-serif;
@@ -30,7 +31,11 @@ p{
     padding:0;
 }
 
-.login {
+#avisoDatos{
+font-size: 1.2em;
+}
+
+.register {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -41,16 +46,14 @@ p{
 
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
-}
-.camposlogin{
+.camposregistro{
     display: flex;
    margin-top: 20px;
    flex-direction: column;
    justify-content: space-between;
-
+   gap: 10px;
+   margin-bottom: 2em;
+   padding-top: 1.8em;
 }
 
 input{
@@ -66,21 +69,13 @@ input{
     background-color:#9a9898 ;
  }
 
-::placeholder{
+ ::placeholder{
     color: #546169;
     padding-left: 8px;
     font-size: 1.2em;
 }
 
-#input-email{
-    margin-bottom: 1rem;
-}
-
-#input-password{
-    margin-bottom: 1.8rem;
-}
-
-button{
+ button{
 
     border-radius: 18px;
     border: none;
@@ -90,17 +85,18 @@ button{
     font-style: normal;
 }
 
+
 .btn-login{
     background-color: #292D2E;
     height: 40px;
-    width: 150px; 
+    width: 150px;
     transition: transform 0.3s ease;
 }
 
 .btn-register{
     background-color: #546169;
-    height: 40px;
-    width: 100px;
+    height: 50px;
+    width: 110px;
     transition: transform 0.3s ease;
 }
 
@@ -116,20 +112,20 @@ button{
     transform: scale(1.1); /* Hace que el botón se agrande al 110% del tamaño original */
 }
 
-
-.botoneslogin{
+.botonesregistro{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px; /* Espacio entre los elementos */
 }
 
-.cuenta-texto{
-    font-size: 1.5em;
+.cuenta-texto {
+    font-size: 1em;
     font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: normal;
-}
-.separator {
-    margin: 10px 0; /* Ajusta el margen superior e inferior para separar los botones */
+    text-align: center;
+    color: #546169;
+    margin-top: 1em; /* Asegura que no haya margen adicional */
+    padding: 0; /* Asegura que no haya padding adicional */
 }
