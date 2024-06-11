@@ -51,6 +51,30 @@
         </div>
     </div>
 
+
+    <!-- Modal2 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar nota</h2>
+            <form id="noteForm">
+                <input type="text" id="noteTitle" name="noteTitle" placeholder="Título">
+                
+                <select id="noteCategory" name="noteCategory">
+                    <option value="" disabled selected>Categoría</option>
+                    <option value="Categoria 1">Categoría 1</option>
+                    <option value="Categoria 2">Categoría 2</option>
+                    <option value="Categoria 3">Categoría 3</option>
+                    <option value="Categoria 4">Categoría 4</option>
+                    <option value="Categoria 5">Categoría 5</option>
+                </select>
+                <textarea id="noteDescription" name="noteDescription" placeholder="Escribe algo..."></textarea>
+                
+                <button type="button" class="check"></button>
+            </form>
+        </div>
+    </div>
+
     <script src="../js/notes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
