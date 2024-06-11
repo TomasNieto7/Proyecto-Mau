@@ -1,3 +1,33 @@
+const jwt = require('jsonwebtoken')
+
+window.onload = init
+
+function init() {
+    if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token')
+        const decoded = jwt.verify(token, "debugKey")
+        console.log(decoded);
+        loadPokemon()
+    } else {
+        window.location.href = 'login.html'
+    }
+}
+
+function loadPokemon() {
+    fetch("http://localhost:3000/notes", {
+        headers: {
+            'Authorization': "bearer " + localStorage.getItem("token")
+        }
+    })
+    .then(function(res) {
+        console.log(res);
+    })
+    .catch(function(err) {
+        console.log(err);
+    })
+}
+
+
 // Open the modal
 function openModal() {
     document.getElementById("modal").style.display = "block";
