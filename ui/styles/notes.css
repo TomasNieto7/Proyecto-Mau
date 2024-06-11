@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('/ui/img/image\ 2.svg'); 
+    background-image: url('../img/image\ 2.svg'); 
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -107,14 +107,14 @@ main {
 }
 
 .actions .delete {
-    background-image: url('/ui/img/deleteicon\ 1.svg');
+    background-image: url('../img/deleteicon\ 1.svg');
 }
 
 .actions .edit {
-    background-image: url('/ui/img/editicon\ 3.svg');
+    background-image: url('../img/editicon\ 3.svg');
 }
 .actions .restore{
-    background-image: url('/ui/img/restoreicon\ 1.svg');
+    background-image: url('../img/restoreicon\ 1.svg');
 }
 
 .add-note {
@@ -130,7 +130,7 @@ main {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    background-image: url('/ui/img/1564491_add_create_new_plus_icon\ 1.svg'); /* Ruta de la imagen del botón agregar */
+    background-image: url('../img/1564491_add_create_new_plus_icon\ 1.svg'); /* Ruta de la imagen del botón agregar */
 }
 
 @media (max-width: 768px) {
