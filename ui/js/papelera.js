@@ -38,7 +38,7 @@ function renderNotes(notes) {
     const notas = document.querySelector('.notas-container')
     notes.map(note => {
         notas.innerHTML += `
-            <div class="nota" id='${note.id}'>
+            <div class="nota ${note.type}" id='${note.id}'>
                     <h3>${note.titulo}</h3>
                     <p>${note.description}</p>
                     <div class="actions">

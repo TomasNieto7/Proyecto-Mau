@@ -270,3 +270,24 @@ main {
     font-family: Arial, sans-serif;
     margin-bottom: 10px;
 }
+
+.Productividad{
+    background-color: #5ccb5f;
+}
+
+.Tarea{
+    background-color: #bc4ed8;
+}
+
+.Pendiente{
+    background-color: #ffa372;
+}
+
+.Creatividad{
+    background-color: #81c9fa;
+}
+
+.Recordatorio{
+    background-color: #ffa8d9;
+}
+
