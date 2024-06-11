@@ -1,23 +1,24 @@
 window.onload = init;
 
+let user
+
 function init() {
     if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
-        try {
-            const decoded = jwt_decode(token); // Utiliza jwt_decode en lugar de jwt.verify
-            getNotes(decoded.userMail)
-        } catch (error) {
-            console.error("Token inválido:", error);
-            window.location.href = 'login.html';
-        }
+        const decoded = jwt_decode(token);
+        user = decoded.userMail
+        getNotes(user)
     } else {
         window.location.href = 'login.html';
     }
     document.querySelector('#logout').addEventListener('click', logout)
+    if (document.querySelector('.check')) {
+        document.querySelector('.check').addEventListener('click', newNote)
+    }
 }
 
 
-function getNotes(user){
+function getNotes(user) {
     axios({
         method: 'post',
         url: 'http://localhost:3000/notes',
@@ -74,7 +75,51 @@ function deleteNote(button) {
 
 
 function editNote() {
-    
+    const nota = button.closest('.nota');
+    const notaId = nota.id;
+    const title = document.querySelector('#noteTitle').value
+    const description = document.querySelector('#noteDescription').value
+    const type = document.querySelector('#noteCategory').value
+    axios({
+        method: 'put',
+        url: 'http://localhost:3000/notes/edit',
+        data: {
+            id: notaId,
+            owner: user,
+            title: title,
+            description: description,
+            type: type
+        }
+    }).then((res) => {
+        if (res.data.code === 201) {
+            console.log(res.data.message);
+        } else {
+            alert("Error al eliminar la nota");
+        }
+    }).catch(error => console.log(error));
+}
+
+function newNote() {
+    const title = document.querySelector('#noteTitle').value
+    const description = document.querySelector('#noteDescription').value
+    const type = document.querySelector('#noteCategory').value
+    console.log(user, title, description, type);
+    axios({
+        method: 'post',
+        url: 'http://localhost:3000/notes/newNote',
+        data: {
+            owner: user,
+            title: title,
+            description: description,
+            type: type
+        }
+    }).then((res) => {
+        if (res.data.code === 201) {
+            console.log(res.data.message);
+        } else {
+            alert("Error al eliminar la nota");
+        }
+    }).catch(error => console.log(error));
 }
 
 
@@ -89,28 +134,27 @@ function closeModal() {
 }
 
 // Close the modal if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == document.getElementById("modal")) {
         closeModal();
     }
 }
 
 // Placeholder handling
-document.getElementById('noteTitle').addEventListener('focus', function() {
+document.getElementById('noteTitle').addEventListener('focus', function () {
     this.placeholder = '';
 });
-document.getElementById('noteTitle').addEventListener('blur', function() {
+document.getElementById('noteTitle').addEventListener('blur', function () {
     if (this.value === '') {
         this.placeholder = 'Título';
     }
 });
 
-document.getElementById('noteDescription').addEventListener('focus', function() {
+document.getElementById('noteDescription').addEventListener('focus', function () {
     this.placeholder = '';
 });
-document.getElementById('noteDescription').addEventListener('blur', function() {
+document.getElementById('noteDescription').addEventListener('blur', function () {
     if (this.value === '') {
         this.placeholder = 'Escribe algo...';
     }
 });
-
