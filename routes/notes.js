@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const notes = express.Router()
 const db = require('../database.js')
 
-notes.get('/', async (req, res, next) => {
+notes.post('/', async (req, res, next) => {
     const {
         owner
     } = req.body

@@ -20,7 +20,7 @@ function init() {
 function renderNotes(user){
     console.log(user);
     axios({
-        method: 'get',
+        method: 'post',
         url: 'http://localhost:3000/notes',
         data: {
             owner: user
