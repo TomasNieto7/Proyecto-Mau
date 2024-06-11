@@ -54,21 +54,14 @@ function logout() {
     window.location.href = 'login.html'
 }
 
-function deleteNote(element) {
-    const id = element.id
-    console.log(id);
-    
-}
-
-function editNote() {
-    
-}
-/*
-axios({
+function deleteNote(button) {
+    const nota = button.closest('.nota');
+    const notaId = nota.id;
+    axios({
         method: 'delete',
         url: 'http://localhost:3000/notes/delete',
         data: {
-            id: id
+            id: notaId
         }
     }).then((res => {
         if (res.data.code === 201) {
@@ -77,7 +70,13 @@ axios({
             alert("error")
         }
     })).catch(error => console.log(error))
- */
+    
+}
+
+function editNote() {
+    
+}
+
 
 // Open the modal
 function openModal() {
