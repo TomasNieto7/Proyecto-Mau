@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script defer src="../js/login.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<title>Login</title>
+<script defer src="../js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <main>
-        <section>
-        </div>
+<main>
+    <section>
+        <div class="login">
+            <h1 id="NoteTitle"> Note it</h1>
+            <p>Tu mundo, tus notas, tu web.</p>
 
-        <div class="botoneslogin">
-            <button class="btn-login">Iniciar sesión</button>
-            <div class="separator">
-                <p class="cuenta-texto">¿Aún no tienes una cuenta?</p>
-            </div>
-            <button class="btn-register">Regístrate</button>
-        </div>
+                <div class="camposlogin">
+            <input type="text" id="input-email" placeholder="email">
+            <input type="password" id="input-password" placeholder="password">
+         
 
-</div>
-        </section>
-    </main>
-</body>
-</html>
+                </div>
+
+                <a href="notes.html"><div class="botoneslogin">
+                    <button class="btn-login">Iniciar sesión</button>
+                    <div class="separator">
+                        <p class="cuenta-texto">¿Aún no tienes una cuenta?</p>
+                    </div>
+                    <button class="btn-register">Regístrate</button>
+                </div>
+
+        </div>
+    </section>
+</main>
