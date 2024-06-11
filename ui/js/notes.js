@@ -59,8 +59,6 @@ async function deleteNote(button) {
     const nota = button.closest('.nota');
     const notaId = nota.id;
     await getNote(notaId)
-    /*
-    
     axios({
         method: 'delete',
         url: 'http://localhost:3000/notes/delete',
@@ -74,8 +72,6 @@ async function deleteNote(button) {
             alert("Error al eliminar la nota");
         }
     }).catch(error => console.log(error));
-    
-    */
 }
 
 function getNote(id) {
@@ -95,14 +91,15 @@ function getNote(id) {
 }
 
 function newNotePapeleta(note) {
+    console.log(note[0]);
     axios({
         method: 'post',
         url: 'http://localhost:3000/papelera/newNote',
         data: {
-            owner: note.owner,
-            title: note.title,
-            description: note.description,
-            type: note.type
+            owner: note[0].owner,
+            title: note[0].titulo,
+            description: note[0].description,
+            type: note[0].type
         }
     }).then((res) => {
         if (res.data.code === 201) {
