@@ -7,7 +7,7 @@ notes.get('/', async (req, res, next) => {
     const {
         owner
     } = req.body
-    const query = `SELECT * NOTES WHERE OWNER = ${owner}`
+    const query = `SELECT * FROM NOTES WHERE OWNER = '${owner}'`
     if (owner) {
         try {
             const notes = await db.query(query)
@@ -32,7 +32,7 @@ notes.get('/getNote', async (req, res, next) => {
     const {
         id
     } = req.body
-    const query = `SELECT * NOTES WHERE ID = ${id}`
+    const query = `SELECT * FROM NOTES WHERE ID = '${id}'`
     if (id) {
         try {
             const note = await db.query(query)
@@ -60,7 +60,7 @@ notes.post('/newNote', async (req, res, next) => {
         description,
         type
     } = req.body
-    const query = `INSERT INTO NOTES(owner, title, description, type) VALUES('${owner}', '${title}', '${description}', '${type}')`
+    const query = `INSERT INTO NOTES(owner, titulo, description, type) VALUES('${owner}', '${title}', '${description}', '${type}')`
     if (owner && title && description && type) {
         try {
             const note = await db.query(query)
@@ -91,7 +91,7 @@ notes.put('/edit', async (req, res, next) => {
         description,
         type
     } = req.body
-    const query = `UPDATE NOTES SET OWNER = '${owner}', TITLE = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
+    const query = `UPDATE NOTES SET OWNER = '${owner}', TITULO = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
     if (id && owner && title && description && type) {
         try {
             const note = await db.query(query)
