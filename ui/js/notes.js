@@ -63,15 +63,15 @@ function deleteNote(button) {
         data: {
             id: notaId
         }
-    }).then((res => {
+    }).then((res) => {
         if (res.data.code === 201) {
-            renderNotes(res.data.message)
+            nota.remove();
         } else {
-            alert("error")
+            alert("Error al eliminar la nota");
         }
-    })).catch(error => console.log(error))
-    
+    }).catch(error => console.log(error));
 }
+
 
 function editNote() {
     
