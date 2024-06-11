@@ -1,6 +1,7 @@
 window.onload = init;
 
 let user
+let idUser
 
 function init() {
     if (localStorage.getItem('token')) {
@@ -14,6 +15,9 @@ function init() {
     document.querySelector('#logout').addEventListener('click', logout)
     if (document.querySelector('.check')) {
         document.querySelector('.check').addEventListener('click', newNote)
+    }
+    if (document.getElementById('check2')) {
+        document.getElementById('check2').addEventListener('click', editNote)
     }
 }
 
@@ -43,7 +47,7 @@ function renderNotes(notes) {
                     <p>${note.description}</p>
                     <div class="actions">
                         <button class="delete" onClick="deleteNote(this)"></button>
-                        <button class="edit"></button>
+                        <button class="edit" onclick="openModal2(this)"></button>
                     </div>
             </div>
         `
@@ -113,8 +117,6 @@ function newNotePapeleta(note) {
 }
 
 function editNote() {
-    const nota = button.closest('.nota');
-    const notaId = nota.id;
     const title = document.querySelector('#noteTitle').value
     const description = document.querySelector('#noteDescription').value
     const type = document.querySelector('#noteCategory').value
@@ -122,7 +124,7 @@ function editNote() {
         method: 'put',
         url: 'http://localhost:3000/notes/edit',
         data: {
-            id: notaId,
+            id:idUser,
             owner: user,
             title: title,
             description: description,
@@ -131,6 +133,8 @@ function editNote() {
     }).then((res) => {
         if (res.data.code === 201) {
             console.log(res.data.message);
+            closeModal();
+            window.location.href = 'notes.html'
         } else {
             alert("Error al eliminar la nota");
         }
@@ -176,6 +180,25 @@ function closeModal() {
 window.onclick = function (event) {
     if (event.target == document.getElementById("modal")) {
         closeModal();
+    }
+}
+
+// Open the modal
+function openModal2(button) {
+    const nota = button.closest('.nota');
+    idUser = nota.id;
+    document.getElementById("modal2").style.display = "block";
+}
+
+// Close the modal
+function closeModal2() {
+    document.getElementById("modal2").style.display = "none";
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function (event) {
+    if (event.target == document.getElementById("modal2")) {
+        closeModal2();
     }
 }
 

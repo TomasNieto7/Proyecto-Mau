@@ -100,8 +100,8 @@ notes.put('/edit', async (req, res, next) => {
             note ? res.status(201).json({
                 code: 201,
                 message: note
-            }) : res.status(404).json({
-                code: 404,
+            }) : res.status(401).json({
+                code: 401,
                 message: "Something went wrong"
             })
 
