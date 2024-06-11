@@ -140,21 +140,37 @@ papelera.post('/restoreNote/:id', async (req, res) => {
         message: "data missing"
     })
 
-    papelera.query(getNote, [noteId], (err, results) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({
-                code: 500,
-                message: 'Error fetching note from PAPELERA'
-            });
-        }
-        
-        if (results.length === 0) {
-            return res.status(404).json({
-                code: 404,
-                message: 'Note not found in PAPELERA'
-            });
-        }
+
+
+
+
+
+
+
+
+
+
+    app.post('/moveNoteToNotes/:id', async (req, res) => {
+        const noteId = req.params.id;
+
+        // Obtén la nota de la papelera
+        const getNoteQuery = 'SELECT * FROM PAPELERA WHERE id = ?';
+        trashDb.query(getNoteQuery, [noteId], (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    code: 500,
+                    message: 'Error fetching note from PAPELERA'
+                });
+            }
+            
+            if (results.length === 0) {
+                return res.status(404).json({
+                    code: 404,
+                    message: 'Note not found in PAPELERA'
+                });
+            }
+    
 
         const note = results[0];
 
@@ -184,6 +200,7 @@ papelera.post('/restoreNote/:id', async (req, res) => {
                 });
             });
         });
+    });
     });
 });
 
