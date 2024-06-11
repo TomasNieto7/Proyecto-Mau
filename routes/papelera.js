@@ -1,9 +1,9 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const notes = express.Router()
+const papelera = express.Router()
 const db = require('../database.js')
 
-notes.get('/', async (req, res, next) => {
+papelera.get('/', async (req, res, next) => {
     const {
         owner
     } = req.body
@@ -28,32 +28,7 @@ notes.get('/', async (req, res, next) => {
     })
 })
 
-notes.get('/getNote', async (req, res, next) => {
-    const {
-        id
-    } = req.body
-    const query = `SELECT * NOTES WHERE ID = ${id}`
-    if (id) {
-        try {
-            const note = await db.query(query)
-            res.status(200).json({
-                code: 200,
-                message: note
-            })
-        } catch (error) {
-            console.log(error);
-            return res.status(404).json({
-                code: 404,
-                message: error
-            })
-        }
-    } else res.status(200).json({
-        code: 200,
-        message: "data missing"
-    })
-})
-
-notes.post('/newNote', async (req, res, next) => {
+papelera.post('/newNote', async (req, res, next) => {
     const {
         owner,
         title,
@@ -83,7 +58,7 @@ notes.post('/newNote', async (req, res, next) => {
 
 })
 
-notes.put('/edit', async (req, res, next) => {
+papelera.put('/edit', async (req, res, next) => {
     const {
         id,
         owner,
@@ -118,7 +93,7 @@ notes.put('/edit', async (req, res, next) => {
 
 })
 
-notes.delete('/delete', async (req, res, next) => {
+papelera.delete('/delete', async (req, res, next) => {
     const query = `DELETE FROM NOTES WHERE ID = '${req.body.id}'`
     if (req.body.id) {
         try {
@@ -140,4 +115,4 @@ notes.delete('/delete', async (req, res, next) => {
     })
 })
 
-module.exports = notes
+module.exports = papelera

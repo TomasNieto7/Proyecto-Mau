@@ -5,6 +5,7 @@ const app = express()
 //Routers
 const user = require("./routes/users.js")
 const notes = require("./routes/notes.js")
+const papelera = require("./routes/papelera.js")
 //Middleware
 const auth = require('./middleware/auth.js')
 const index = require('./middleware/index.js')
@@ -20,7 +21,8 @@ app.get("/", index)
 
 app.use("/user", user)
 app.use(auth)
-app.use("/notes", user)
+app.use("/notes", notes)
+app.use("/papelera", papelera)
 
 
 app.use(notFound)
