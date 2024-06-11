@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/ui/img/image\ 2.svg'); 
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Sansita One';
+    font-size: 3rem;
+    color: #546169;
+}
+
+.opciones {
+    font-family: serif;
+    color: #546169;
+    font-size: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.divider {
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+#notas {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#notas h2 {
+    margin-top: 0;
+    color: #546169;
+    font-size: 1.8rem;
+}
+
+.notas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.nota {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1 1 calc(33% - 20px);
+    box-sizing: border-box;
+    position: relative;
+    min-width: 200px;
+    max-width: 300px;
+    height: 15rem;
+}
+
+.nota h3 {
+    margin-top: 0;
+}
+
+.actions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.actions .delete {
+    background-image: url('/ui/img/deleteicon\ 1.svg');
+}
+
+.actions .edit {
+    background-image: url('/ui/img/editicon\ 3.svg');
+}
+.actions .restore{
+    background-image: url('/ui/img/restoreicon\ 1.svg');
+}
+
+.add-note {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    background-image: url('/ui/img/1564491_add_create_new_plus_icon\ 1.svg'); /* Ruta de la imagen del botón agregar */
+}
+
+@media (max-width: 768px) {
+    .nota {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .nota {
+        flex: 1 1 100%;
+    }
+}
