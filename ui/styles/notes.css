@@ -250,3 +250,23 @@ main {
     color: #546169;
     margin-bottom: 20px;
 }
+
+#noteTitle2 {
+    font-size: 1.5rem;
+    font-family: 'Sansita One';
+    margin-bottom: 10px;
+}
+
+#noteDescription2 {
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    flex-grow: 1;
+}
+
+#noteCategory2 {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+}

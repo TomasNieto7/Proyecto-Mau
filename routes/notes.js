@@ -7,7 +7,6 @@ notes.post('/', async (req, res, next) => {
     const {
         owner
     } = req.body
-    console.log(owner);
     const query = `SELECT * FROM NOTES WHERE OWNER = '${owner}'`
     if (owner) {
         try {
@@ -87,13 +86,13 @@ notes.post('/newNote', async (req, res, next) => {
 notes.put('/edit', async (req, res, next) => {
     const {
         id,
-        owner,
         title,
         description,
         type
     } = req.body
-    const query = `UPDATE NOTES SET OWNER = '${owner}', TITULO = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
-    if (id && owner && title && description && type) {
+    console.log(id), title, description, type;
+    const query = `UPDATE NOTES SET TITULO = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
+    if (id && title && description && type) {
         try {
             const note = await db.query(query)
             console.log(note);

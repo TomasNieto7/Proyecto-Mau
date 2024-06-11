@@ -117,15 +117,14 @@ function newNotePapeleta(note) {
 }
 
 function editNote() {
-    const title = document.querySelector('#noteTitle').value
-    const description = document.querySelector('#noteDescription').value
-    const type = document.querySelector('#noteCategory').value
+    const title = document.querySelector('#noteTitle2').value
+    const description = document.querySelector('#noteDescription2').value
+    const type = document.querySelector('#noteCategory2').value
     axios({
         method: 'put',
         url: 'http://localhost:3000/notes/edit',
         data: {
-            id:idUser,
-            owner: user,
+            id: idUser,
             title: title,
             description: description,
             type: type
@@ -184,10 +183,31 @@ window.onclick = function (event) {
 }
 
 // Open the modal
-function openModal2(button) {
+async function openModal2(button) {
     const nota = button.closest('.nota');
     idUser = nota.id;
+    await getNoteModal(idUser)
     document.getElementById("modal2").style.display = "block";
+}
+
+function getNoteModal(id) {
+    axios({
+        method: 'post',
+        url: 'http://localhost:3000/notes/getNote',
+        data: {
+            id: id
+        }
+    }).then((res => {
+        if (res.data.code === 200) {
+            const note = res.data.message
+            console.log(note);
+            document.querySelector('#noteTitle2').value = note[0].titulo
+            document.querySelector('#noteDescription2').value = note[0].description
+            document.querySelector('#noteCategory2').value = note[0].type
+        } else {
+            alert("error")
+        }
+    })).catch(error => console.log(error))
 }
 
 // Close the modal
