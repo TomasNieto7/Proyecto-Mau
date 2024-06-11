@@ -7,7 +7,7 @@ papelera.get('/', async (req, res, next) => {
     const {
         owner
     } = req.body
-    const query = `SELECT * NOTES WHERE OWNER = ${owner}`
+    const query = `SELECT * FROM NOTES WHERE OWNER = '${owner}'`
     if (owner) {
         try {
             const notes = await db.query(query)
@@ -35,7 +35,7 @@ papelera.post('/newNote', async (req, res, next) => {
         description,
         type
     } = req.body
-    const query = `INSERT INTO NOTES(owner, title, description, type) VALUES('${owner}', '${title}', '${description}', '${type}')`
+    const query = `INSERT INTO PAPELERA(owner, titulo, description, type) VALUES('${owner}', '${title}', '${description}', '${type}')`
     if (owner && title && description && type) {
         try {
             const note = await db.query(query)
@@ -66,7 +66,7 @@ papelera.put('/edit', async (req, res, next) => {
         description,
         type
     } = req.body
-    const query = `UPDATE NOTES SET OWNER = '${owner}', TITLE = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
+    const query = `UPDATE NOTES SET OWNER = '${owner}', TITULO = '${title}', DESCRIPTION = '${description}', TYPE = '${type}' WHERE ID = '${id}'`
     if (id && owner && title && description && type) {
         try {
             const note = await db.query(query)
@@ -114,5 +114,79 @@ papelera.delete('/delete', async (req, res, next) => {
         message: "data missing"
     })
 })
+
+
+
+papelera.post('/restoreNote/:id', async (req, res) => {
+    const noteId = req.params.id;
+
+    const query = `SELECT * FROM PAPELERA WHERE id = '${req.body.id}'`;
+    if(req.body.id){
+        try{
+            const note = await db.query(query)
+            res.status(201).json({
+                code: 201,
+                message: 'note obtained successfully'
+            })
+        }catch(error){
+            console.log(error);
+            return res.status(404).json({
+                code: 404,
+                message: "something went wrong"
+            })
+        }
+    } else res.status(404).json({
+        code: 404,
+        message: "data missing"
+    })
+
+    papelera.query(getNote, [noteId], (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                code: 500,
+                message: 'Error fetching note from PAPELERA'
+            });
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({
+                code: 404,
+                message: 'Note not found in PAPELERA'
+            });
+        }
+
+        const note = results[0];
+
+        const insertNote = 'INSERT INTO NOTAS (owner, titulo, description, type) VALUES (?, ?, ?, ?)';
+        notes.query(insertNote, [note.owner, note.titulo, note.description, note.type], (err) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    code: 500,
+                    message: 'Error inserting note into NOTAS'
+                });
+            }
+
+            const deleteNote = 'DELETE FROM PAPELERA WHERE id = ?';
+            papelera.query(deleteNote, [noteId], (err) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        code: 500,
+                        message: 'Error deleting note from PAPELERA'
+                    });
+                }
+
+                res.status(200).json({
+                    code: 200,
+                    message: 'Note moved to NOTAS successfully'
+                });
+            });
+        });
+    });
+});
+
+
 
 module.exports = papelera
