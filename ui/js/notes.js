@@ -6,7 +6,7 @@ function init() {
         try {
             const decoded = jwt_decode(token); // Utiliza jwt_decode en lugar de jwt.verify
             console.log(decoded);
-            loadPokemon();
+            renderNotes(decoded.userMail)
         } catch (error) {
             console.error("Token inválido:", error);
             window.location.href = 'login.html';
@@ -16,22 +16,77 @@ function init() {
     }
 }
 
-function loadPokemon() {
-    fetch("http://localhost:3000/notes", {
-        headers: {
-            'Authorization': "bearer " + localStorage.getItem("token")
+
+function renderNotes(user){
+    console.log(user);
+    axios({
+        method: 'get',
+        url: 'http://localhost:3000/notes',
+        data: {
+            owner: user
         }
-    })
-    .then(function(res) {
-        return res.json(); // Asegúrate de procesar la respuesta como JSON
-    })
-    .then(function(data) {
-        console.log(data);
-    })
-    .catch(function(err) {
-        console.log(err);
-    });
+    }).then((res => {
+        if (res.data.code === 200) {
+            alert("exitoso!!")
+            console.log(res.data.message);
+        } else {
+            alert("user incorrets")
+        }
+    })).catch(error => console.log(error))
 }
+
+/*
+
+<div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+                <div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+                <div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+                <div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+                <div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+                <div class="nota">
+                    <h3>Ideas proyecto</h3>
+                    <p>Descripción de la nota, lorem</p>
+                    <div class="actions">
+                        <button class="delete"></button>
+                        <button class="edit"></button>
+                    </div>
+                </div>
+
+ */
 
 // Open the modal
 function openModal() {
@@ -68,4 +123,4 @@ document.getElementById('noteDescription').addEventListener('blur', function() {
         this.placeholder = 'Escribe algo...';
     }
 });
-s
+

@@ -11,6 +11,7 @@ notes.get('/', async (req, res, next) => {
     if (owner) {
         try {
             const notes = await db.query(query)
+            console.log(notes);
             res.status(200).json({
                 code: 200,
                 message: notes
