@@ -5,8 +5,7 @@ function init() {
         const token = localStorage.getItem('token');
         try {
             const decoded = jwt_decode(token); // Utiliza jwt_decode en lugar de jwt.verify
-            console.log(decoded);
-            renderNotes(decoded.userMail)
+            getNotes(decoded.userMail)
         } catch (error) {
             console.error("Token inválido:", error);
             window.location.href = 'login.html';
@@ -14,11 +13,11 @@ function init() {
     } else {
         window.location.href = 'login.html';
     }
+    document.querySelector('#logout').addEventListener('click', logout)
 }
 
 
-function renderNotes(user){
-    console.log(user);
+function getNotes(user){
     axios({
         method: 'post',
         url: 'http://localhost:3000/notes',
@@ -27,65 +26,57 @@ function renderNotes(user){
         }
     }).then((res => {
         if (res.data.code === 200) {
-            alert("exitoso!!")
-            console.log(res.data.message);
+            renderNotes(res.data.message)
         } else {
-            alert("user incorrets")
+            alert("error")
         }
     })).catch(error => console.log(error))
 }
 
+function renderNotes(notes) {
+    const notas = document.querySelector('.notas-container')
+    notes.map(note => {
+        notas.innerHTML += `
+            <div class="nota" id='${note.id}'>
+                    <h3>${note.titulo}</h3>
+                    <p>${note.description}</p>
+                    <div class="actions">
+                        <button class="delete" onClick="deleteNote(this)"></button>
+                        <button class="edit"></button>
+                    </div>
+            </div>
+        `
+    })
+}
+
+function logout() {
+    localStorage.removeItem('token')
+    window.location.href = 'login.html'
+}
+
+function deleteNote(element) {
+    const id = element.id
+    console.log(id);
+    
+}
+
+function editNote() {
+    
+}
 /*
-
-<div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="delete"></button>
-                        <button class="edit"></button>
-                    </div>
-                </div>
-
+axios({
+        method: 'delete',
+        url: 'http://localhost:3000/notes/delete',
+        data: {
+            id: id
+        }
+    }).then((res => {
+        if (res.data.code === 201) {
+            renderNotes(res.data.message)
+        } else {
+            alert("error")
+        }
+    })).catch(error => console.log(error))
  */
 
 // Open the modal

@@ -7,11 +7,11 @@ notes.post('/', async (req, res, next) => {
     const {
         owner
     } = req.body
+    console.log(owner);
     const query = `SELECT * FROM NOTES WHERE OWNER = '${owner}'`
     if (owner) {
         try {
             const notes = await db.query(query)
-            console.log(notes);
             res.status(200).json({
                 code: 200,
                 message: notes
