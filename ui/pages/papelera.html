@@ -6,6 +6,9 @@
     <title>Note it</title>
     <link rel="stylesheet" href="../styles/notes.css">
     <link href="https://fonts.googleapis.com/css2?family=Sansita+One&display=swap" rel="stylesheet">
+    <script defer src="../js/papelera.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 </head>
 <body>
     <header>
@@ -13,7 +16,7 @@
         <nav>
             <ul>
                 <li class="opciones"><a href="papelera.html">Papelera</a></li>
-                <li class="opciones"><a href="#">Cerrar sesión</a></li>
+                <li class="opciones" id="logout">Cerrar sesión</li>
             </ul>
         </nav>
     </header>
@@ -22,48 +25,6 @@
         <section id="notas">
             <h2>Mis notas:</h2>
             <div class="notas-container">
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
-                <div class="nota">
-                    <h3>Ideas proyecto</h3>
-                    <p>Descripción de la nota, lorem</p>
-                    <div class="actions">
-                        <button class="restore"></button>
-                    </div>
-                </div>
             </div>
         </section>
     </main>

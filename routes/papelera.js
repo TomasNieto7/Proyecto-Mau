@@ -3,17 +3,42 @@ const jwt = require('jsonwebtoken')
 const papelera = express.Router()
 const db = require('../database.js')
 
-papelera.get('/', async (req, res, next) => {
+papelera.post('/', async (req, res, next) => {
     const {
         owner
     } = req.body
-    const query = `SELECT * FROM NOTES WHERE OWNER = '${owner}'`
+    const query = `SELECT * FROM PAPELERA WHERE OWNER = '${owner}'`
     if (owner) {
         try {
             const notes = await db.query(query)
             res.status(200).json({
                 code: 200,
                 message: notes
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(404).json({
+                code: 404,
+                message: error
+            })
+        }
+    } else res.status(200).json({
+        code: 200,
+        message: "data missing"
+    })
+})
+
+papelera.post('/getNote', async (req, res, next) => {
+    const {
+        id
+    } = req.body
+    const query = `SELECT * FROM PAPELERA WHERE ID = '${id}'`
+    if (id) {
+        try {
+            const note = await db.query(query)
+            res.status(200).json({
+                code: 200,
+                message: note
             })
         } catch (error) {
             console.log(error);
@@ -94,7 +119,7 @@ papelera.put('/edit', async (req, res, next) => {
 })
 
 papelera.delete('/delete', async (req, res, next) => {
-    const query = `DELETE FROM NOTES WHERE ID = '${req.body.id}'`
+    const query = `DELETE FROM PAPELERA WHERE ID = '${req.body.id}'`
     if (req.body.id) {
         try {
             const note = await db.query(query)
