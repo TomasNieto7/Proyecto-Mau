@@ -151,8 +151,8 @@ user.post('/login', async (req, res, next) => {
                     message: token
                 })
             } else {
-                res.status(200).json({
-                    code: 200,
+                res.status(401).json({
+                    code: 401,
                     message: "Mail or Password incorrect"
                 })
             }     
